@@ -1,0 +1,11 @@
+import boto3
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('half_coders-project')
+
+
+def lambda_handler(event,context):
+    QRC= event['qrc']
+    resp = table.get_item(key={
+        "qrc":QRC
+    })
+    return resp['Item']
